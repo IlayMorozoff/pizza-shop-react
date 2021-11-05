@@ -10,6 +10,7 @@ const SortBy: FC = () => {
 
   const onSelectSortBy = (sortBy: string): void => {
     setSelectSort(sortBy);
+    setIsOpen(false);
   };
 
   const onClickSortBy = (): void => {
