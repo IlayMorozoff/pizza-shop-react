@@ -10,6 +10,13 @@ const GlobalStyles = createGlobalStyle`
   html {
     font-family: 'Roboto', sans-serif;
   }
+
+  body {
+  background-color: #ffdf8c;
+  width: 100%;
+  height: 100%;
+  padding: 45px;
+  }
 `;
 
 export default GlobalStyles;
