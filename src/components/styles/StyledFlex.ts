@@ -10,6 +10,8 @@ const StyledFlex = styled.div<IPropsStyledFlex>`
   margin: ${({ margin }) => margin || '0'};
   cursor: ${({ cursor }) => cursor || 'default'};
   position: ${({ position }) => position || 'static'};
+  flex-basis: ${({ flex }) => flex || 'auto'};
+  gap: ${({ gap }) => gap || '0'};
 `;
 
 export default StyledFlex;

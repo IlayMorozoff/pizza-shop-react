@@ -38,9 +38,9 @@ const SortBy: FC = () => {
             {kindOfSortBy.map((sortBy) => {
               return (
                 <StyledSortItem
-                  isActive={selectSort === sortBy}
-                  key={sortBy}
-                  onClick={() => onSelectSortBy(sortBy)}
+                  isActive={selectSort === sortBy.name}
+                  key={sortBy.name}
+                  onClick={() => onSelectSortBy(sortBy.name)}
                 >
                   {sortBy}
                 </StyledSortItem>
