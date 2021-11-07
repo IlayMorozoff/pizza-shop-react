@@ -47,3 +47,8 @@ export interface IPropsPizzaTypes {
   types: Array<number>;
   sizes: Array<number>;
 }
+
+export interface ISortType {
+  name: string;
+  type: string;
+}

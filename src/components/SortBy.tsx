@@ -1,16 +1,21 @@
 import { FC, useState } from 'react';
+import { setSortBy } from '../store/reducers/filtersSlice';
 import { kindOfSortBy } from '../utils/data';
+import { useAppDispatch } from '../utils/hooks/redux';
+import { ISortType } from '../utils/interfaces';
 import StyledFlex from './styles/StyledFlex';
 import { StyledSortItem, StyledSortList } from './styles/StyledSortList';
 import StyledText from './styles/StyledText';
 
 const SortBy: FC = () => {
+  const dispatch = useAppDispatch();
   const [selectSort, setSelectSort] = useState<string>('популярности');
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const onSelectSortBy = (sortBy: string): void => {
-    setSelectSort(sortBy);
+  const onSelectSortBy = (sort: ISortType): void => {
+    setSelectSort(sort.name);
     setIsOpen(false);
+    dispatch(setSortBy(sort.type));
   };
 
   const onClickSortBy = (): void => {
@@ -35,14 +40,14 @@ const SortBy: FC = () => {
       {isOpen && (
         <StyledFlex direction="column" position="relative">
           <StyledSortList>
-            {kindOfSortBy.map((sortBy) => {
+            {kindOfSortBy.map((sortBy: ISortType) => {
               return (
                 <StyledSortItem
                   isActive={selectSort === sortBy.name}
                   key={sortBy.name}
-                  onClick={() => onSelectSortBy(sortBy.name)}
+                  onClick={() => onSelectSortBy(sortBy)}
                 >
-                  {sortBy}
+                  {sortBy.name}
                 </StyledSortItem>
               );
             })}
