@@ -1,1 +1,1 @@
-# pizza-shop-reac
+# pizza-shop-react
