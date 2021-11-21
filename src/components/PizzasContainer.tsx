@@ -22,14 +22,21 @@ const PizzasContainer: FC = () => {
       <StyledText textColor="#000000" fontSize="32px" padding="32px 0 0 0">
         Все пиццы
       </StyledText>
-      <StyledFlex gap="0 48px">
+      {/* <StyledFlex gap="0 48px"> */}
+      <div
+        style={{
+          width: '100%',
+          margin: '0 -10px',
+        }}
+      >
         {items.length &&
           items.map((pizza) => {
             return <PizzaCard key={pizza.id} {...pizza} />;
           })}
         {isLoading && <Spiner />}
         {error && <StyledText>{error}</StyledText>}
-      </StyledFlex>
+        {/* </StyledFlex> */}
+      </div>
     </>
   );
 };

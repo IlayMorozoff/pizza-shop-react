@@ -15,7 +15,14 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, category, price, types, name, siz
   };
 
   return (
-    <StyledFlex direction="column" margin="35px 0 65px 0" flex="22%">
+    <div
+      style={{
+        display: 'inline-block',
+        width: '25%',
+        padding: '20px 18px',
+        // direction="column" margin="35px 0 65px 0" flex="22%"
+      }}
+    >
       <StyledWrapperIgm>
         <StyledImg src={imageUrl} alt="pizza picture" />
       </StyledWrapperIgm>
@@ -38,7 +45,7 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, category, price, types, name, siz
           <StyledButtonCounter>1</StyledButtonCounter>
         </StyledButton>
       </StyledFlex>
-    </StyledFlex>
+    </div>
   );
 };
 
