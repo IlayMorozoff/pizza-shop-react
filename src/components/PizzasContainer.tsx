@@ -17,6 +17,12 @@ const PizzasContainer: FC = () => {
     dispatch(fetchPizzas());
   }, [dispatch]);
 
+  const [value, setValue] = useState('');
+
+  const onclick = () => {
+    navigator.clipboard.writeText(value);
+  };
+
   return (
     <>
       <StyledText textColor="#000000" fontSize="32px" padding="32px 0 0 0">
@@ -26,7 +32,9 @@ const PizzasContainer: FC = () => {
       <div
         style={{
           width: '100%',
-          margin: '0 -10px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridGap: '20px 20px',
         }}
       >
         {items.length &&
@@ -37,6 +45,10 @@ const PizzasContainer: FC = () => {
         {error && <StyledText>{error}</StyledText>}
         {/* </StyledFlex> */}
       </div>
+      <input value={value} onChange={(e) => setValue(e.target.value)} />
+      <button type="button" onClick={onclick}>
+        copy
+      </button>
     </>
   );
 };

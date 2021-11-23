@@ -17,10 +17,13 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, category, price, types, name, siz
   return (
     <div
       style={{
-        display: 'inline-block',
-        width: '25%',
-        padding: '20px 18px',
-        // direction="column" margin="35px 0 65px 0" flex="22%"
+        // display: 'inline-block',
+        // width: '25%',
+        // padding: '20px 18px',
+        // direction="column" margin="35px 0 65px 0" flex="22%",
+        // display: 'grid',
+        // gridTemplateColumns: 'repeat(4, 1fr)',
+        // gridGap: '20px 20px',
       }}
     >
       <StyledWrapperIgm>
