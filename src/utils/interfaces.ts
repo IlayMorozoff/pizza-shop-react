@@ -42,6 +42,7 @@ export interface IPizzaData {
   price: number;
   category: number;
   rating: number;
+  onClickAddToBasket: (pizza: IPizzaBasket) => void;
 }
 
 export interface IPropsPizzaTypes {
@@ -58,4 +59,13 @@ export interface IPropsPizzaTypes {
 export interface ISortType {
   name: string;
   type: string;
+}
+
+export interface IPizzaBasket {
+  imageUrl: string;
+  newPrice: number;
+  type: string;
+  size: number;
+  name: string;
+  counter: number;
 }

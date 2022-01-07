@@ -1,19 +1,24 @@
 import { FC, useEffect } from 'react';
+import { addToBasket } from '../store/reducers/basketSlice';
 import { fetchPizzas } from '../store/reducers/pizzasSlice';
 import { useAppDispatch, useAppSelector } from '../utils/hooks/redux';
+import { IPizzaBasket } from '../utils/interfaces';
 import PizzaCard from './PizzaCard';
-import Spiner from './Spiner';
 import StyledGridContainer from './styles/StyledGridContainer';
 import StyledText from './styles/StyledText';
 
 const PizzasContainer: FC = () => {
   const dispatch = useAppDispatch();
-  const { error, items, isLoading } = useAppSelector((state) => state.pizzasReducer);
+  const { error, items } = useAppSelector((state) => state.pizzasReducer);
   const { category, sortBy } = useAppSelector((state) => state.filtersReducer);
 
   useEffect(() => {
-    dispatch(fetchPizzas());
-  }, [dispatch]);
+    dispatch(fetchPizzas({ category, sortBy }));
+  }, [category, dispatch, sortBy]);
+
+  const onAddPizzaToBasket = (pizza: IPizzaBasket): void => {
+    dispatch(addToBasket(pizza));
+  };
 
   return (
     <>
@@ -22,24 +27,9 @@ const PizzasContainer: FC = () => {
       </StyledText>
       <StyledGridContainer>
         {items.length !== 0 &&
-          items
-            .filter((pizza) => {
-              if (category === 0) {
-                return pizza;
-              }
-              return pizza.category === category;
-            })
-            .sort((a, b) => {
-              if (sortBy === 'price') {
-                return a.price - b.price;
-              }
-              if (sortBy === 'popular') {
-                return a.rating - b.rating;
-              }
-              return a.name.localeCompare(b.name);
-            })
-            .map((pizza) => <PizzaCard key={pizza.id} {...pizza} />)}
-        {isLoading && <Spiner />}
+          items.map((pizza) => (
+            <PizzaCard key={pizza.id} {...pizza} onClickAddToBasket={onAddPizzaToBasket} />
+          ))}
         {error && <StyledText>{error}</StyledText>}
       </StyledGridContainer>
     </>

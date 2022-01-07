@@ -11,9 +11,9 @@ interface PizzasState {
 
 export const fetchPizzas = createAsyncThunk(
   'pizzas/fetchPizzas',
-  async (_, { rejectWithValue }) => {
+  async ({ category, sortBy }: { category: number; sortBy: string }, { rejectWithValue }) => {
     try {
-      const pizzas = await pizzaService.getAll();
+      const pizzas = await pizzaService.sortAndSetCategory(category, sortBy);
       return pizzas;
     } catch (error) {
       return rejectWithValue('Не удалось загрузить пиццы');

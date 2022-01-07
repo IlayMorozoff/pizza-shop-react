@@ -5,14 +5,16 @@ import StyledButton from './styles/StyledButton';
 import StyledButtonCounter from './styles/StyledButtonCounter';
 import StyledFlex from './styles/StyledFlex';
 import { StyledWrapperIgm, StyledImg } from './styles/StyledImg';
+import StyledPlus from './styles/StyledPlus';
 import StyledText from './styles/StyledText';
 
-const PizzaCard: FC<IPizzaData> = ({ imageUrl, price, types, name, sizes }) => {
+const PizzaCard: FC<IPizzaData> = ({ imageUrl, price, types, name, sizes, onClickAddToBasket }) => {
   const typesDefault = ['тонкое', 'традиционное'];
   const sizesDefault = [26, 30, 40];
   const [activeType, setActiveTypes] = useState(typesDefault[types[0]]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [newPrice, setNewPrice] = useState(price);
+  const [counter, setCounter] = useState(0);
 
   const onChangePrice = (size: number): void => {
     if (size === 30) {
@@ -47,11 +49,13 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, price, types, name, sizes }) => {
     const pizzaToBasket = {
       imageUrl,
       newPrice,
-      activeType,
-      activeSize,
+      type: activeType,
+      size: activeSize,
       name,
+      counter: counter + 1,
     };
-    console.log(pizzaToBasket);
+    onClickAddToBasket(pizzaToBasket);
+    setCounter((count) => count + 1);
   };
 
   return (
@@ -83,8 +87,9 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, price, types, name, sizes }) => {
           от {newPrice} ₽
         </StyledText>
         <StyledButton onClick={onAddToBasket}>
+          <StyledPlus>+</StyledPlus>
           Добавить
-          <StyledButtonCounter>1</StyledButtonCounter>
+          {counter === 0 ? null : <StyledButtonCounter>{counter}</StyledButtonCounter>}
         </StyledButton>
       </StyledFlex>
     </StyledFlex>
