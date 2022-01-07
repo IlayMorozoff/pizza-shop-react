@@ -16,7 +16,7 @@ const BasketButton: FC = () => {
           <StyledText padding="2px 0 0 10px">520 ₽</StyledText>
         </StyledBasketButton>
         <StyledBasketButton borderRadius="0 30px 30px 0">
-          <BasketIcon />
+          <BasketIcon size={20} color="white" />
           <StyledText padding="2px 0 0 10px">3</StyledText>
         </StyledBasketButton>
       </StyledFlex>

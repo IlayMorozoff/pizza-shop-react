@@ -18,6 +18,7 @@ export const StyledPizzaTypesItem = styled.div<{ isActive?: boolean; disabled?: 
       background-color: #ffffff;
       color: #2c2c2c;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+      pointer-events: none;
   `}
   ${props => props.disabled && css`
       color: #2c2c2c;

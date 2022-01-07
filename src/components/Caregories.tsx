@@ -1,12 +1,11 @@
 import { FC, useState } from 'react';
 import { setCategory } from '../store/reducers/filtersSlice';
 import { categoriesList } from '../utils/data';
-import { useAppDispatch, useAppSelector } from '../utils/hooks/redux';
+import { useAppDispatch } from '../utils/hooks/redux';
 import Category from './Category';
 import StyledFlex from './styles/StyledFlex';
 
 const Caregories: FC = () => {
-  // const {category} = useAppSelector((state) => state.filtersReducer);
   const dispatch = useAppDispatch();
   const [selectItem, setSelectItem] = useState('Все');
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { IPropsStyledFlex } from '../../utils/interfaces';
 
 const StyledFlex = styled.div<IPropsStyledFlex>`
-  display: flex;
+  display: ${({ display }) => display || 'flex'};
   flex-direction: ${(props) => props.direction || 'row'};
   flex-wrap: ${(props) => props.flexWrap || 'wrap'};
   align-items: ${(props) => props.align || 'stretch'};

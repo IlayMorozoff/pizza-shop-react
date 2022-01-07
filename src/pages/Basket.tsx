@@ -1,12 +1,21 @@
 import { FC } from 'react';
+import HeaderBasket from '../components/HeaderBasket';
 import Logo from '../components/Logo';
 import Contrainer from '../components/styles/Container';
+import StyledBasketContainer from '../components/styles/StyledBasketContainer';
+import StyledDivider from '../components/styles/StyledDivider';
+import StyledFlex from '../components/styles/StyledFlex';
 
 const Basket: FC = () => {
   return (
     <Contrainer>
-      <Logo />
-      <div>BASKET</div>
+      <StyledFlex margin="0 0 40px 0">
+        <Logo />
+      </StyledFlex>
+      <StyledDivider />
+      <StyledBasketContainer>
+        <HeaderBasket />
+      </StyledBasketContainer>
     </Contrainer>
   );
 };

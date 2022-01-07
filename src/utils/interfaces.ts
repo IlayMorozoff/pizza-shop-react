@@ -14,6 +14,7 @@ export interface IPropsStyledFlex {
   position?: string;
   flex?: string;
   gap?: string;
+  display?: string;
 }
 
 export interface IPropsStyledTextDefault {
@@ -46,6 +47,12 @@ export interface IPizzaData {
 export interface IPropsPizzaTypes {
   types: Array<number>;
   sizes: Array<number>;
+  typesDefault: Array<string>;
+  sizesDefault: Array<number>;
+  onSelectType: (type: string) => void;
+  onSelectSize: (size: number) => void;
+  activeSize: number;
+  activeType: string;
 }
 
 export interface ISortType {

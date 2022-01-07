@@ -11,4 +11,5 @@ export const StyledWrapperIgm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
 `;
