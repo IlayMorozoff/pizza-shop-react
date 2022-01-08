@@ -48,10 +48,10 @@ const BasketItem: FC<IPizzaBasket> = ({
   return (
     <>
       <StyledDivider />
-      <StyledFlex justify="space-between" align="center" margin="30px 0 0 0">
+      <StyledFlex justify="space-between" align="center" margin="30px 0 30px">
         <StyledFlex>
           <img src={imageUrl} alt={name} width={80} height={80} />
-          <StyledFlex direction="column" justify="center">
+          <StyledFlex direction="column" justify="center" margin="0 0 0 15px">
             <StyledWrapper>
               <StyledText textColor="#000" fontSize="20px">
                 {name}
