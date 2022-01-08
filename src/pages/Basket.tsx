@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import BasketContainer from '../components/BasketContainer';
 import HeaderBasket from '../components/HeaderBasket';
 import Logo from '../components/Logo';
 import Contrainer from '../components/styles/Container';
@@ -15,6 +16,7 @@ const Basket: FC = () => {
       <StyledDivider />
       <StyledBasketContainer>
         <HeaderBasket />
+        <BasketContainer />
       </StyledBasketContainer>
     </Contrainer>
   );

@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useAppSelector } from '../utils/hooks/redux';
 import { IPizzaData } from '../utils/interfaces';
 import PizzaTypes from './PizzaTypes';
 import StyledButton from './styles/StyledButton';
@@ -14,7 +15,10 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, price, types, name, sizes, onClic
   const [activeType, setActiveTypes] = useState(typesDefault[types[0]]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [newPrice, setNewPrice] = useState(price);
-  const [counter, setCounter] = useState(0);
+  const counter = useAppSelector((state) => state.basketReducer.basketItems)
+    .filter((item) => item.name === name)
+    .map((item) => item.counter)
+    .reduce((sum, cur) => sum + cur, 0);
 
   const onChangePrice = (size: number): void => {
     if (size === 30) {
@@ -48,14 +52,14 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, price, types, name, sizes, onClic
   const onAddToBasket = () => {
     const pizzaToBasket = {
       imageUrl,
-      newPrice,
+      price: newPrice,
       type: activeType,
       size: activeSize,
       name,
-      counter: counter + 1,
+      counter: 1,
+      totalPriceItem: newPrice,
     };
     onClickAddToBasket(pizzaToBasket);
-    setCounter((count) => count + 1);
   };
 
   return (
@@ -82,16 +86,18 @@ const PizzaCard: FC<IPizzaData> = ({ imageUrl, price, types, name, sizes, onClic
         activeType={activeType}
         activeSize={activeSize}
       />
-      <StyledFlex align="center" justify="space-between" margin="20px 0 0 0">
-        <StyledText textColor="#000000" fontSize="22px">
-          от {newPrice} ₽
-        </StyledText>
-        <StyledButton onClick={onAddToBasket}>
-          <StyledPlus>+</StyledPlus>
-          Добавить
-          {counter === 0 ? null : <StyledButtonCounter>{counter}</StyledButtonCounter>}
-        </StyledButton>
-      </StyledFlex>
+      <div style={{ maxHeight: '40px', margin: '20px 0 0 0' }}>
+        <StyledFlex align="center" justify="space-between">
+          <StyledText textColor="#000000" fontSize="22px">
+            от {newPrice} ₽
+          </StyledText>
+          <StyledButton onClick={onAddToBasket}>
+            <StyledPlus>+</StyledPlus>
+            Добавить
+            {counter !== 0 && <StyledButtonCounter>{counter}</StyledButtonCounter>}
+          </StyledButton>
+        </StyledFlex>
+      </div>
     </StyledFlex>
   );
 };

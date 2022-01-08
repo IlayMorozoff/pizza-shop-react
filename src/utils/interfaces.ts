@@ -63,9 +63,10 @@ export interface ISortType {
 
 export interface IPizzaBasket {
   imageUrl: string;
-  newPrice: number;
+  price: number;
   type: string;
   size: number;
   name: string;
+  totalPriceItem: number;
   counter: number;
 }

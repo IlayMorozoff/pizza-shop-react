@@ -1,10 +1,18 @@
 import { FC } from 'react';
+import { clearBasket } from '../store/reducers/basketSlice';
+import { useAppDispatch } from '../utils/hooks/redux';
 import BasketIcon from './BasketIcon';
 import StyledFlex from './styles/StyledFlex';
 import StyledText from './styles/StyledText';
 import TrashIcon from './TrashIcon';
 
 const HeaderBasket: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const onClearBasket = () => {
+    dispatch(clearBasket());
+  };
+
   return (
     <StyledFlex margin="90px 0 30px 0" justify="space-between">
       <StyledFlex>
@@ -13,7 +21,7 @@ const HeaderBasket: FC = () => {
           Корзина
         </StyledText>
       </StyledFlex>
-      <StyledFlex cursor="pointer" align="center">
+      <StyledFlex cursor="pointer" align="center" onClick={onClearBasket}>
         <TrashIcon />
         <StyledText textColor="#b6b6b6" padding="0 0 0 8px" isCursor fontWeight="400">
           Очистить корзину

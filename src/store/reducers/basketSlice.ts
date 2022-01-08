@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import checkBasketItem from '../../utils/checkBasketItem';
 import { IPizzaBasket } from '../../utils/interfaces';
+import { getItemsCount, getTotalPrice } from '../../utils/utilsState';
 
 interface BasketState {
   basketItems: IPizzaBasket[];
@@ -19,41 +21,57 @@ const basketSlice = createSlice({
   initialState,
   reducers: {
     addToBasket(state, action: PayloadAction<IPizzaBasket>) {
-      state.basketItems.push(action.payload);
+      const isItem = state.basketItems.some((pizza) => checkBasketItem(pizza, action.payload));
+      if (!isItem) {
+        state.basketItems.push(action.payload);
+      } else {
+        const item = state.basketItems.find((pizza) => checkBasketItem(pizza, action.payload));
+        if (item) {
+          item.counter += 1;
+          item.totalPriceItem += action.payload.price;
+        }
+      }
+      state.itemsCount = getItemsCount(state.basketItems);
+      state.totalPrice = getTotalPrice(state.basketItems);
     },
     deleteFromBasket(state, action: PayloadAction<IPizzaBasket>) {
-      state.basketItems.filter(
-        (pizza) =>
-          pizza.size !== action.payload.size &&
-          pizza.type !== action.payload.type &&
-          pizza.imageUrl !== action.payload.imageUrl &&
-          pizza.name !== action.payload.name &&
-          pizza.newPrice !== action.payload.newPrice,
+      const indexItem = state.basketItems.findIndex((pizza) =>
+        checkBasketItem(pizza, action.payload),
       );
+      const totalPriceDeletedItem = state.basketItems[indexItem].totalPriceItem;
+      const totalCountDeletedItem = state.basketItems[indexItem].counter;
+      state.itemsCount -= totalCountDeletedItem;
+      state.totalPrice -= totalPriceDeletedItem;
+      state.basketItems.splice(indexItem, 1);
     },
     clearBasket(state) {
       state.basketItems = [];
+      state.itemsCount = 0;
+      state.totalPrice = 0;
     },
-    setCounter(state, action: PayloadAction<IPizzaBasket>) {
-      const pizzaItem = state.basketItems.filter(
-        (pizza) =>
-          pizza.size === action.payload.size &&
-          pizza.type === action.payload.type &&
-          pizza.imageUrl === action.payload.imageUrl &&
-          pizza.name === action.payload.name &&
-          pizza.newPrice === action.payload.newPrice,
-      )[0];
-      pizzaItem.counter += 1;
+
+    plusItem(state, action: PayloadAction<IPizzaBasket>) {
+      const item = state.basketItems.find((pizza) => checkBasketItem(pizza, action.payload));
+      if (item) {
+        item.counter += 1;
+        item.totalPriceItem += action.payload.price;
+      }
+      state.itemsCount = getItemsCount(state.basketItems);
+      state.totalPrice = getTotalPrice(state.basketItems);
     },
-    setTotalPrice(state, action: PayloadAction<number>) {
-      state.totalPrice += action.payload;
-    },
-    setTotalCount(state, action: PayloadAction<number>) {
-      state.itemsCount += action.payload;
+    minusItem(state, action: PayloadAction<IPizzaBasket>) {
+      const item = state.basketItems.find((pizza) => checkBasketItem(pizza, action.payload));
+      if (item && item.counter > 1) {
+        item.counter -= 1;
+        item.totalPriceItem -= action.payload.price;
+      }
+      state.itemsCount = getItemsCount(state.basketItems);
+      state.totalPrice = getTotalPrice(state.basketItems);
     },
   },
 });
 
-export const { addToBasket, deleteFromBasket, clearBasket } = basketSlice.actions;
+export const { addToBasket, deleteFromBasket, clearBasket, plusItem, minusItem } =
+  basketSlice.actions;
 
 export default basketSlice.reducer;

@@ -11,28 +11,12 @@ const StyledButton = styled.button<{ primary?: boolean; outlined?: boolean }>`
   color: #fe5f1e;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  /* &::before {
-    content: '+';
-    font-size: 30px;
-    color: #fe5f1e;
-    position: absolute;
-    top: 3px;
-    left: 11px;
-  } */
 
   &:hover {
     background-color: #fe5f1e;
     color: #ffffff;
-    /* &::before {
-      content: '+';
-      font-size: 30px;
-      color: #ffffff;
-      position: absolute;
-      top: 3px;
-      left: 11px;
-    } */
   }
 `;
 
