@@ -18,7 +18,8 @@ export const StyledBtnBasket = styled.button<{ $isPayButton?: boolean }>`
   color: ${({ $isPayButton }) => ($isPayButton ? 'white' : '#d3d3d3')};
   border: 2px solid ${({ $isPayButton }) => ($isPayButton ? '#fe5f1e' : '#d3d3d3')};
   height: 55px;
-  width: 25%;
+  max-width: 250px;
+  width: 150%;
   border-radius: 30px;
   font-size: 16px;
   position: relative;

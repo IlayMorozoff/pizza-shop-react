@@ -34,6 +34,7 @@ const pizzasSlice = createSlice({
   extraReducers: {
     [fetchPizzas.pending.type]: (state: PizzasState) => {
       state.isLoading = true;
+      state.items = [];
     },
     [fetchPizzas.fulfilled.type]: (state: PizzasState, action: PayloadAction<IPizzaData[]>) => {
       state.isLoading = false;
@@ -43,6 +44,7 @@ const pizzasSlice = createSlice({
     [fetchPizzas.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
+      state.items = [];
     },
   },
 });

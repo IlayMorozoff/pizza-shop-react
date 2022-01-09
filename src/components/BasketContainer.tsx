@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppSelector } from '../utils/hooks/redux';
@@ -16,11 +16,6 @@ const Count = styled.span<{ $isCount?: boolean }>`
 
 const BasketContainer: FC = () => {
   const { basketItems, itemsCount, totalPrice } = useAppSelector((state) => state.basketReducer);
-  const history = useHistory();
-
-  const onBack = () => {
-    history.push('/');
-  };
 
   return (
     <>
@@ -35,7 +30,9 @@ const BasketContainer: FC = () => {
         </StyledText>
       </StyledFlex>
       <StyledFlex justify="space-between" align="center" margin="40px 0 0">
-        <StyledBtnBasket onClick={onBack}>Вернуться назад</StyledBtnBasket>
+        <Link to="/" style={{ display: 'block', width: '25%' }}>
+          <StyledBtnBasket>Вернуться назад</StyledBtnBasket>
+        </Link>
         <StyledBtnBasket $isPayButton>Оплатить сейчас</StyledBtnBasket>
       </StyledFlex>
     </>
