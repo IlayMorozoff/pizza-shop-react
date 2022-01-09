@@ -9,7 +9,11 @@ import StyledFlex from './styles/StyledFlex';
 import StyledText from './styles/StyledText';
 
 const StyledWrapper = styled.div`
-  max-width: 150px;
+  max-width: 130px;
+`;
+
+const StyledFlexWithWidth = styled(StyledFlex)`
+  width: 110px;
 `;
 
 const BasketItem: FC<IPizzaBasket> = ({
@@ -58,18 +62,18 @@ const BasketItem: FC<IPizzaBasket> = ({
               </StyledText>
             </StyledWrapper>
             <StyledWrapper>
-              <StyledFlex>
-                <StyledText textColor="#8d8d8d" fontWeight="400">
+              <StyledFlex margin="3px 0 0 0">
+                <StyledText textColor="#8d8d8d" fontWeight="400" fontSize="14px">
                   {type} тесто,
                 </StyledText>
-                <StyledText textColor="#8d8d8d" fontWeight="400">
+                <StyledText textColor="#8d8d8d" fontWeight="400" fontSize="14px">
                   {size} см.
                 </StyledText>
               </StyledFlex>
             </StyledWrapper>
           </StyledFlex>
         </StyledFlex>
-        <div style={{ width: '110px', display: 'flex', justifyContent: 'space-between' }}>
+        <StyledFlexWithWidth justify="space-between">
           <BasketButtonCircle $isCount type="button" onClick={onMinus}>
             -
           </BasketButtonCircle>
@@ -79,7 +83,7 @@ const BasketItem: FC<IPizzaBasket> = ({
           <BasketButtonCircle $isCount type="button" onClick={onPlus}>
             +
           </BasketButtonCircle>
-        </div>
+        </StyledFlexWithWidth>
         <StyledText textColor="#000" fontSize="26px">
           {totalPriceItem} ₽
         </StyledText>
